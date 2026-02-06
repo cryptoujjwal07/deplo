@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import './style.css';
 import { useToast } from '../contexts/ToastService';
 import { ClipLoader } from 'react-spinners';
@@ -18,7 +17,7 @@ function EditProfile() {
   const [previewImage, setPreviewImage] = useState("");
   const { isAuthenticated, user,setUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-  const { notifyError, notifySuccess, notifyWarning } = useToast();
+  const { notifyError, notifySuccess } = useToast();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -54,7 +53,7 @@ function EditProfile() {
       data.append('profileImage', profileImage);
     }
 
-    fetch('http://localhost:5000/users/auth/update-user', {
+    fetch('https://deplo-q15a.onrender.com/users/auth/update-user', {
       method: 'PUT',
       body: data,
 
