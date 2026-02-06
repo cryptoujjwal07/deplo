@@ -29,12 +29,12 @@ function Profile() {
 
     useEffect(() => {
         if (user.userId) fetchUserProducts(user.userId);
-    }, []);
+    }, [user.userId]);
 
     const fetchUserProducts = async (userId) => {
         setIsLoading(true);
         try {
-            const response = await fetch(`http://localhost:5000/users/post/user-post?userId=${userId}`);
+            const response = await fetch(`https://deplo-q15a.onrender.com/users/post/user-post?userId=${userId}`);
             if (!response.ok) throw new Error('Network response was not ok');
             const data = await response.json();
             setProducts(data);
@@ -51,7 +51,7 @@ function Profile() {
 
         try {
 
-            const response = await fetch(`http://localhost:5000/users/post/products/update-status/${productId}`, {
+            const response = await fetch(`https://deplo-q15a.onrender.com/users/post/products/update-status/${productId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ function Profile() {
     const deleteItem = async () => {
         if (deletingPid) {
             try {
-                const response = await fetch(`http://localhost:5000/users/post/product/delete-product/${deletingPid}`, {
+                const response = await fetch(`https://deplo-q15a.onrender.com/users/post/product/delete-product/${deletingPid}`, {
                     method: 'DELETE', 
                 });
                 if (response.ok) {
