@@ -14,7 +14,7 @@ function Wishlist() {
  
     useEffect(() => {
         fetchWishlist();
-    }, [isAuthenticated]);
+    }, [isAuthenticated, fetchWishlist]);
 
     const openItem = (product) => {
             if (product) {
