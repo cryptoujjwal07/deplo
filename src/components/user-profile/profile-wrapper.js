@@ -48,7 +48,7 @@ function ProfileWrapper() {
             navigate('/');
             notifyWarning("Sign required!");
         }
-    }, [isAuthenticated, user]);
+    }, [isAuthenticated, user, navigate, notifyWarning]);
     
 
     return (
