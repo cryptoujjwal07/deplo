@@ -9,7 +9,7 @@ const socketContext = createContext(null);
 let socket;
 const getSocket = () => {
   if (!socket) {
-    socket = io('http://localhost:3001');
+    socket = io('https://deplo-q15a.onrender.com');
   }
   return socket;
 };
@@ -117,7 +117,7 @@ const SocketContext = ({ children }) => {
   const fetchChatsLists = async () => {
     if (user.userId) {
       try {
-        const response = await fetch(`http://localhost:3001/users/chatlists/chat-list/${user.userId}`);
+        const response = await fetch(`https://deplo-q15a.onrender.com/users/chatlists/chat-list/${user.userId}`);
         const data = await response.json();
 
         setTimeout(() => {
@@ -138,7 +138,7 @@ const SocketContext = ({ children }) => {
 
   const markMessagesAsSeen = async (chatId) => {
     try {
-      await axios.put(`http://localhost:3001/users/chats/mark-seen/${chatId}`, { currentUserId });
+      await axios.put(`https://deplo-q15a.onrender.com/users/chats/mark-seen/${chatId}`, { currentUserId });
 
       setChatList((prevList) => {
         let unseenMessagesCountToSubtract = 0;
@@ -168,7 +168,7 @@ const SocketContext = ({ children }) => {
   const fetchChatMessages = async (peerId) => {
     if (peerId) {
       try {
-        const response = await fetch(`http://localhost:3001/users/chats/${user.userId}/${peerId}`);
+        const response = await fetch(`https://deplo-q15a.onrender.com/users/chats/${user.userId}/${peerId}`);
         if (!response.ok) throw new Error('Failed to fetch messages');
 
         const chat = await response.json();
@@ -184,7 +184,7 @@ const SocketContext = ({ children }) => {
   const deleteMessage = async (messageId, senderId) => {
     if (messageId && senderId) {
       try {
-        const response = await fetch(`http://localhost:3001/users/chats/delete-message/${messageId}?senderId=${senderId}`, {
+        const response = await fetch(`https://deplo-q15a.onrender.com/users/chats/delete-message/${messageId}?senderId=${senderId}`, {
           method: 'DELETE',
         });
         const data = await response.json();
@@ -201,7 +201,7 @@ const SocketContext = ({ children }) => {
     if (selectedChatUserId && currentUserId && chatId) {
       const userId = currentUserId;
       try {
-        const response = await fetch(`http://localhost:3001/users/chats/delete-chat/${chatId}`, {
+        const response = await fetch(`https://deplo-q15a.onrender.com/users/chats/delete-chat/${chatId}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
@@ -226,7 +226,7 @@ const SocketContext = ({ children }) => {
     const userId = user.userId;
     if (selectedChatUserId) {
       try {
-        const response = await fetch(`http://localhost:3001/users/auth/block-user/${userId}`, {
+        const response = await fetch(`https://deplo-q15a.onrender.com/users/auth/block-user/${userId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -268,7 +268,7 @@ const SocketContext = ({ children }) => {
 
   const fetchBlockedUsers = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:3001/users/auth/blocked-users/${userId}`);
+      const response = await fetch(`https://deplo-q15a.onrender.com/users/auth/blocked-users/${userId}`);
       if (!response.ok) throw new Error('Failed to fetch blocked users');
       const data = await response.json();
       return data ? data.blockedUsers : [];
@@ -290,7 +290,7 @@ const SocketContext = ({ children }) => {
     if (sendData) {
       setIsRequesting(true);
       try {
-        const response = await fetch('http://localhost:5000/users/send-call-back-request', {
+        const response = await fetch('https://deplo-q15a.onrender.com/users/send-call-back-request', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
